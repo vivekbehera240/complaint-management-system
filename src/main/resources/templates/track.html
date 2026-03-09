@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Track Complaint</title>
+</head>
+<body>
+
+<h2>Track Your Complaint</h2>
+
+<form action="/track" method="post">
+
+    <!-- CSRF Token for Spring Security -->
+    <input type="hidden"
+           th:name="${_csrf.parameterName}"
+           th:value="${_csrf.token}" />
+
+    <label>Enter Complaint ID:</label>
+    <input type="number" name="id" required>
+
+    <button type="submit">Track</button>
+
+</form>
+
+<br>
+
+<div th:if="${complaint != null}">
+    <h3>Complaint Details</h3>
+
+    <p><b>ID:</b> <span th:text="${complaint.id}"></span></p>
+    <p><b>Description:</b> <span th:text="${complaint.text}"></span></p>
+    <p><b>Category:</b> <span th:text="${complaint.category}"></span></p>
+    <p><b>Status:</b> <span th:text="${complaint.status}"></span></p>
+</div>
+
+<div th:if="${complaint == null}">
+    <p style="color:red;">Complaint not found</p>
+</div>
+
+</body>
+</html>
